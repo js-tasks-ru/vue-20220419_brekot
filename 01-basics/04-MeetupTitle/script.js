@@ -10,16 +10,13 @@ const Root = defineComponent({
   data() {
     return {
       meetupId: 0,
-      meetupName: ''
+      meetupName: '',
     };
   },
 
   watch: {
-
     meetupId() {
-
       this.fetchMeetupById(this.meetupId).then((data) => {
-
         this.meetupName = data.title;
       });
     },
@@ -36,8 +33,8 @@ const Root = defineComponent({
           });
         }
       });
-    }
-  }
+    },
+  },
 });
 
 const app = createApp(Root);

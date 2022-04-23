@@ -37,14 +37,12 @@ const Root = defineComponent({
   data() {
     return {
       search: '',
-      emails: []
+      emails: [],
     };
   },
 
   computed: {
-
     filteredEmail() {
-
       if (!this.emails) {
         return null;
       }
@@ -54,11 +52,10 @@ const Root = defineComponent({
       let searchLowerCase = this.search.toLowerCase();
 
       for (const elem of this.emails) {
-
-          result.push({
-            'value' : elem,
-            'flag' : this.search !== '' && elem.toLowerCase().indexOf(searchLowerCase) > -1
-          });
+        result.push({
+          value: elem,
+          flag: this.search !== '' && elem.toLowerCase().indexOf(searchLowerCase) > -1,
+        });
       }
 
       return result;
@@ -66,11 +63,8 @@ const Root = defineComponent({
   },
 
   mounted() {
-
     fetchData().then((data) => {
-
       for (const elem of data) {
-
         this.emails.push(elem.email);
       }
     });
