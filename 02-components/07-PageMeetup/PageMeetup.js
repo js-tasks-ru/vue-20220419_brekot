@@ -24,7 +24,7 @@ export default defineComponent({
 
   data() {
     return {
-      meetup: {},
+      meetup: null,
       loading: false,
       error: false,
     };
@@ -44,7 +44,7 @@ export default defineComponent({
     getData() {
       this.loading = true;
       this.error = false;
-      this.meetup = {};
+      this.meetup = null;
 
       fetchMeetupById(this.meetupId)
         .then((result) => {
@@ -61,7 +61,7 @@ export default defineComponent({
 
   template: `
     <div class="page-meetup">
-      <meetup-view :meetup="meetup" v-if="Object.keys(meetup).length && !loading"></meetup-view>
+      <meetup-view :meetup="meetup" v-if="meetup && !loading"></meetup-view>
 
       <ui-container v-if="loading && !error">
         <ui-alert>Загрузка...</ui-alert>
