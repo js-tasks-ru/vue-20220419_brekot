@@ -2,8 +2,6 @@ import { createApp, defineComponent } from './vendor/vue.esm-browser.js';
 
 const API_URL = 'https://course-vue.javascript.ru/api';
 
-// Предположу что fetchMeetupById можно вынести в methods, но куда в таком случае деть API_URL ? Как то описываются костанты компонентов?
-
 const Root = defineComponent({
   name: 'Root',
 
