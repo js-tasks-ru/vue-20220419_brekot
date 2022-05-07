@@ -1,18 +1,24 @@
 <template>
-  <div class="dropdown dropdown_opened">
-    <button type="button" class="dropdown__toggle dropdown__toggle_icon">
-      <ui-icon icon="tv" class="dropdown__icon" />
-      <span>Title</span>
+  <div class="dropdown" :class="show ? 'dropdown_opened' : ''">
+    <button type="button" class="dropdown__toggle" :class="isIcon ? 'dropdown__toggle_icon' : ''" @click="open">
+      <ui-icon v-if="icon" :icon="icon" class="dropdown__icon" />
+      <span>{{ name }}</span>
     </button>
-
-    <div class="dropdown__menu" role="listbox">
-      <button class="dropdown__item dropdown__item_icon" role="option" type="button">
-        <ui-icon icon="tv" class="dropdown__icon" />
-        Option 1
-      </button>
-      <button class="dropdown__item dropdown__item_icon" role="option" type="button">
-        <ui-icon icon="tv" class="dropdown__icon" />
-        Option 2
+    <select v-show="false" v-model="localModelValue">
+      <option v-for="option in options" :key="option.id" :value="option.value">{{ option.text }}</option>
+    </select>
+    <div v-show="show" class="dropdown__menu" role="listbox">
+      <button
+        v-for="option in options"
+        :key="option.id"
+        class="dropdown__item"
+        :class="isIcon ? 'dropdown__item_icon' : ''"
+        role="option"
+        type="button"
+        @click="change(option.value)"
+      >
+        <ui-icon v-if="option.icon" :icon="option.icon" class="dropdown__icon" />
+        {{ option.text }}
       </button>
     </div>
   </div>
@@ -25,6 +31,65 @@ export default {
   name: 'UiDropdown',
 
   components: { UiIcon },
+
+  props: {
+    options: {
+      type: Array,
+    },
+    modelValue: {
+      type: String,
+    },
+    title: {
+      type: String,
+    },
+  },
+
+  emits: ['update:modelValue'],
+
+  data() {
+    return {
+      show: false,
+    };
+  },
+
+  computed: {
+    isIcon() {
+      return this.options.some((e) => {
+        return e.icon;
+      });
+    },
+    name() {
+      if (this.modelValue) return this.findElem().text;
+      else return this.title;
+    },
+    icon() {
+      if (this.modelValue) return this.findElem().icon;
+      else return false;
+    },
+    localModelValue: {
+      get() {
+        return this.modelValue;
+      },
+      set(newValue) {
+        this.$emit('update:modelValue', newValue);
+      },
+    },
+  },
+
+  methods: {
+    open() {
+      this.show = !this.show;
+    },
+    change(value) {
+      this.$emit('update:modelValue', value);
+      this.show = false;
+    },
+    findElem() {
+      return this.options.find((e) => {
+        return e.value === this.modelValue;
+      });
+    },
+  },
 };
 </script>
 
