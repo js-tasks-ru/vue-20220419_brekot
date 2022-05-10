@@ -31,7 +31,7 @@ export default {
     };
   },
 
-  mounted: function () {
+  created: function () {
     setTimeout(() => {
       this.show = false;
     }, this.time);

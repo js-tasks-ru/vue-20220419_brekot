@@ -1,6 +1,6 @@
 <template>
-  <div class="dropdown" :class="show ? 'dropdown_opened' : ''">
-    <button type="button" class="dropdown__toggle" :class="isIcon ? 'dropdown__toggle_icon' : ''" @click="open">
+  <div class="dropdown" :class="{ 'dropdown_opened' : show }">
+    <button type="button" class="dropdown__toggle" :class="{ 'dropdown__toggle_icon' : isIcon }" @click="open">
       <ui-icon v-if="icon" :icon="icon" class="dropdown__icon" />
       <span>{{ name }}</span>
     </button>
@@ -12,7 +12,7 @@
         v-for="option in options"
         :key="option.id"
         class="dropdown__item"
-        :class="isIcon ? 'dropdown__item_icon' : ''"
+        :class="{ 'dropdown__item_icon' : isIcon }"
         role="option"
         type="button"
         @click="change(option.value)"
@@ -59,11 +59,11 @@ export default {
       });
     },
     name() {
-      if (this.modelValue) return this.findElem().text;
+      if (this.modelValue) return this.findElem.text;
       else return this.title;
     },
     icon() {
-      if (this.modelValue) return this.findElem().icon;
+      if (this.modelValue) return this.findElem.icon;
       else return false;
     },
     localModelValue: {
@@ -74,6 +74,9 @@ export default {
         this.$emit('update:modelValue', newValue);
       },
     },
+    findElem() {
+      return this.options.find(e => e.value === this.modelValue);
+    },
   },
 
   methods: {
@@ -83,12 +86,7 @@ export default {
     change(value) {
       this.$emit('update:modelValue', value);
       this.show = false;
-    },
-    findElem() {
-      return this.options.find((e) => {
-        return e.value === this.modelValue;
-      });
-    },
+    }
   },
 };
 </script>
