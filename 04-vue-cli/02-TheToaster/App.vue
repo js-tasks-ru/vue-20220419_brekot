@@ -3,6 +3,7 @@
   <p>
     <button @click="success">Add Success Message</button>
     <button @click="error">Add Error Message</button>
+    <button @click="info">Add info Message</button>
   </p>
 </template>
 
@@ -21,6 +22,10 @@ export default {
 
     error() {
       this.$refs.toaster.error('Error ' + new Date().toLocaleTimeString());
+    },
+
+    info() {
+      this.$refs.toaster.info('Info ' + new Date().toLocaleTimeString());
     },
   },
 };
