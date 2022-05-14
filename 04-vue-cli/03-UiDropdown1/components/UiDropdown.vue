@@ -1,6 +1,6 @@
 <template>
-  <div class="dropdown" :class="{ 'dropdown_opened' : show }">
-    <button type="button" class="dropdown__toggle" :class="{ 'dropdown__toggle_icon' : isIcon }" @click="open">
+  <div class="dropdown" :class="{ dropdown_opened: show }">
+    <button type="button" class="dropdown__toggle" :class="{ dropdown__toggle_icon: isIcon }" @click="open">
       <ui-icon v-if="icon" :icon="icon" class="dropdown__icon" />
       <span>{{ name }}</span>
     </button>
@@ -12,7 +12,7 @@
         v-for="option in options"
         :key="option.id"
         class="dropdown__item"
-        :class="{ 'dropdown__item_icon' : isIcon }"
+        :class="{ dropdown__item_icon: isIcon }"
         role="option"
         type="button"
         @click="change(option.value)"
@@ -75,7 +75,7 @@ export default {
       },
     },
     findElem() {
-      return this.options.find(e => e.value === this.modelValue);
+      return this.options.find((e) => e.value === this.modelValue);
     },
   },
 
@@ -86,7 +86,7 @@ export default {
     change(value) {
       this.$emit('update:modelValue', value);
       this.show = false;
-    }
+    },
   },
 };
 </script>
