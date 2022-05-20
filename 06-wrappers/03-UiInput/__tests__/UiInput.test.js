@@ -121,7 +121,6 @@ describe('wrappers/UiInput', () => {
       expect(findInput(wrapper).element === document.activeElement).toBeTruthy();
     });
 
-    /*
     describe('Дополнительная часть - модификатор lazy', () => {
       it('UiInput не должен обновлять значение модели в процессе ввода с модификатором lazy', async () => {
         const modelValue = 'SampleText';
@@ -132,7 +131,7 @@ describe('wrappers/UiInput', () => {
         expect(wrapper.emitted('update:modelValue')).not.toBeDefined();
       });
 
-      it('UiInput должен обновлять значение модели после изменения в поле ввода с модификатором lazy', async () => {
+     it('UiInput должен обновлять значение модели после изменения в поле ввода с модификатором lazy', async () => {
         const modelValue = 'SampleText';
         const wrapper = shallowMount(UiInput, { props: { modelModifiers: { lazy: true } } });
         const formControl = findInput(wrapper);
@@ -142,6 +141,5 @@ describe('wrappers/UiInput', () => {
         expect(wrapper.emitted('update:modelValue')[0]).toEqual([modelValue]);
       });
     });
-    */
   });
 });
