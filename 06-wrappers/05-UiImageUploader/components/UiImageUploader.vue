@@ -25,19 +25,25 @@ const States = {
   LOADING: 'loading',
   FILLED: 'filled',
 };
+
 export default {
   name: 'UiImageUploader',
   inheritAttrs: false,
+
   States,
+
   props: {
     uploader: {
       type: Function,
     },
+
     preview: {
       type: String,
     },
   },
+
   emits: ['upload', 'select', 'error', 'remove'],
+
   data() {
     return {
       // Храним текущее состояние
@@ -46,10 +52,12 @@ export default {
       selectedImage: null,
     };
   },
+
   computed: {
     previewSrc() {
       return this.selectedImage ?? this.preview;
     },
+
     // Текст от текущего состояния
     stateText() {
       return {
@@ -59,18 +67,22 @@ export default {
       }[this.state];
     },
   },
+
   methods: {
     handleFileSelect($event) {
       const file = $event.target.files[0];
       // Выводим текущий файл через URL.createObjectURL
       this.selectedImage = URL.createObjectURL(file);
       this.$emit('select', file);
+
       // Если загрузчика нет - сразу считаем файл выбранным
       if (!this.uploader) {
         this.state = States.FILLED;
         return;
       }
+
       this.state = States.LOADING;
+
       return this.uploader(file)
         .then((result) => {
           this.state = States.FILLED;
@@ -87,6 +99,7 @@ export default {
           this.selectedImage = null;
         });
     },
+
     handleClick($event) {
       if (this.state === States.LOADING) {
         // Игнорируем клик во время загрузки
@@ -99,19 +112,23 @@ export default {
       }
       // Когда ничего не выбрано, клик обрабатывается по умолчанию, открывая диалог выбора файла
     },
+
     removeFile() {
       this.$refs.input.value = '';
     },
   },
 };
 </script>
+
 <style scoped>
 .image-uploader {
 }
+
 .image-uploader__input {
   opacity: 0;
   height: 0;
 }
+
 .image-uploader__preview {
   --bg-url: var(--default-cover);
   background-size: cover;
@@ -128,6 +145,7 @@ export default {
   max-width: 512px;
   height: 228px;
 }
+
 .image-uploader__text {
   color: var(--white);
   font-family: 'Nunito', sans-serif;
@@ -135,9 +153,11 @@ export default {
   font-size: 20px;
   line-height: 28px;
 }
+
 .image-uploader__preview:hover {
   border-color: var(--blue);
 }
+
 .image-uploader__preview.image-uploader__preview-loading {
   cursor: no-drop;
 }
