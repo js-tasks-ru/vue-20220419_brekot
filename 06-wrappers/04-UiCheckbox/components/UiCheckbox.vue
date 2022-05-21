@@ -19,7 +19,6 @@ export default {
   },
 
   computed: {
-
     customModel: {
       get() {
         return this.modelValue;
