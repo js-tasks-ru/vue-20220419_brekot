@@ -1,5 +1,10 @@
 <template>
-  <component :is="tag" class="button" v-bind="tag === 'button' && { type: 'button' }" :class="['button_' + variant, { 'button_block' : block }]">
+  <component
+    :is="tag"
+    class="button"
+    v-bind="tag === 'button' && { type: 'button' }"
+    :class="['button_' + variant, { button_block: block }]"
+  >
     <slot />
   </component>
 </template>

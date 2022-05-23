@@ -1,9 +1,12 @@
 <template>
-  <div class="input-group" :class="{
+  <div
+    class="input-group"
+    :class="{
       'input-group_icon': $slots['left-icon'] || $slots['right-icon'],
       'input-group_icon-left': $slots['left-icon'],
       'input-group_icon-right': $slots['right-icon'],
-    }">
+    }"
+  >
     <div v-if="$slots['left-icon']" class="input-group__icon">
       <slot name="left-icon" />
     </div>
@@ -13,10 +16,10 @@
       ref="input"
       v-bind="$attrs"
       class="form-control"
-      :class="{ 'form-control_rounded' : rounded, 'form-control_sm' : small }"
+      :class="{ 'form-control_rounded': rounded, 'form-control_sm': small }"
       :value="modelValue"
-      @[action]="$emit('update:modelValue', $event.target.value);"
-      />
+      @[action]="$emit('update:modelValue', $event.target.value)"
+    />
 
     <div v-if="$slots['right-icon']" class="input-group__icon">
       <slot name="right-icon" />
@@ -49,8 +52,8 @@ export default {
     modelModifiers: {
       default: () => ({
         lazy: false,
-      })
-    }
+      }),
+    },
   },
 
   emits: ['update:modelValue'],
@@ -59,10 +62,9 @@ export default {
     tag() {
       return this.multiline ? 'textarea' : 'input';
     },
-    action()
-    {
+    action() {
       return this.modelModifiers.lazy ? 'change' : 'input';
-    }
+    },
   },
 
   methods: {

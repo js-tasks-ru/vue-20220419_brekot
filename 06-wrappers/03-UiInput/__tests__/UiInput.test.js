@@ -131,7 +131,7 @@ describe('wrappers/UiInput', () => {
         expect(wrapper.emitted('update:modelValue')).not.toBeDefined();
       });
 
-     it('UiInput должен обновлять значение модели после изменения в поле ввода с модификатором lazy', async () => {
+      it('UiInput должен обновлять значение модели после изменения в поле ввода с модификатором lazy', async () => {
         const modelValue = 'SampleText';
         const wrapper = shallowMount(UiInput, { props: { modelModifiers: { lazy: true } } });
         const formControl = findInput(wrapper);
